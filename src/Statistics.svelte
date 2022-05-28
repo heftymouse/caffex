@@ -1,7 +1,24 @@
 <script lang="ts">
     import Line from "svelte-chartjs/src/Line.svelte"
     import Bar from "svelte-chartjs/src/Bar.svelte"
-    import {getLast24HoursTotalCaffeine} from "./lib/types"
+    import {CaffeineStorage, getCaffeineAtAll, getDailyLimitMessage, getLast24HoursTotalCaffeine} from "./lib/types";
+    import {caffeineData} from "./stores";
+
+    let cachedCaffeineData: CaffeineStorage[];
+    let last24hoursCaffeine: number;
+    $: last24hoursCaffeine = getLast24HoursTotalCaffeine(cachedCaffeineData);
+    let instantaneousCaffeine: number;
+    $: instantaneousCaffeine = Math.floor(getCaffeineAtAll(cachedCaffeineData, new Date()) * 10) / 10;
+    let age: number;
+    $: age = Number(localStorage.getItem('age'));
+    let weight: number;
+    $: weight = Number(localStorage.getItem('weight'));
+    let dailyLimitMessage: string;
+    $: dailyLimitMessage = getDailyLimitMessage(age, weight, last24hoursCaffeine);
+
+    caffeineData.subscribe(data => {
+        cachedCaffeineData = data;
+    });
 
     let instantaneousCaffeineData = {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00"],
@@ -19,7 +36,6 @@
             data: [100, 87, 75.8, 66, 57.4, 50, 43.5]
         }]
     };
-    
     let dailyCaffeineData = {
         labels: ["22/7", "23/7", "24/7", "25/7", "26/7", "27/7"],
         datasets: [
@@ -46,37 +62,18 @@
             }
         ]
     };
-    
     let options = {
         responsive: true,
         scales: {
-            xAxes: [
-                {
-                    barPercentage: 1,
-                    gridLines: {
-                        display: true,
-                        color: "rgba(0, 0, 0, 0.1)"
-                    }
-                }
-            ],
-            yAxes: [
-                {
-                    gridLines: {
-                        display: true,
-                        color: "rgba(0, 0, 0, 0.1)"
-                    },
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }
-            ]
+            xAxes: [{barPercentage: 1, gridLines: {display: true, color: "rgba(0, 0, 0, 0.1)"}}],
+            yAxes: [{gridLines: {display: true, color: "rgba(0, 0, 0, 0.1)"}, ticks: {beginAtZero: true}}]
         }
     };
 </script>
 
-<h4 class="text-xl">Caffeine in the last 24 hours: {"placeholder"} mg</h4>
-<h4 class="text-xl">Approximate amount of caffeine: 50 mg</h4>
-<h4 class="text-xl">Your intake is not above the daily limit</h4>
+<h4 class="text-xl">Caffeine in the last 24 hours: {last24hoursCaffeine} mg</h4>
+<h4 class="text-xl">Approximate amount of caffeine: {instantaneousCaffeine} mg</h4>
+<h4 class="text-xl">{dailyLimitMessage}</h4>
 <div class="w-full text-left p-4">
     <h4 class="text-2xl decoration-gray-300 underline">Recent caffeine intakes</h4>
     <table class="table-auto text-xl w-full">
