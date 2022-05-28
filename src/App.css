@@ -5,3 +5,7 @@
 .main-header {
     @apply w-full p-3 text-center text-2xl font-semibold border-b border-gray-400;
 }
+
+th {
+    @apply font-semibold
+}
