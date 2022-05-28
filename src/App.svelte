@@ -6,7 +6,7 @@
   import "./App.css";
 </script>
 
-<header class="w-full p-3 text-center text-2xl font-semibold border-b border-gray-400">Beans</header>
+<header class="main-header">Beans</header>
 <main>
   <TabView>
     <TabList>
