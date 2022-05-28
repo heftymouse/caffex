@@ -5,6 +5,8 @@
     import Question from './lib/Question.svelte'
     import Fa from "svelte-fa";
     import { faClose } from "@fortawesome/free-solid-svg-icons";
+    import type { CaffeineStorage } from "./lib/types";
+    import { Db } from "./lib/db";
     
     const mgPerMl = {
         "Brewed Coffee": 0.4,
@@ -47,6 +49,22 @@
         currentTab.set("");
         pageName.set("Home");
     })
+
+    async function onFormSubmit(e) {
+        let data: FormData = new FormData(e.target);
+        console.log(...data);
+        const cf: CaffeineStorage = {
+            drink: data.get('drinkName') as string,
+            caffeine: parseInt(data.get('drinkAmount') as string),
+            timestamp: new Date(Date.now())
+        }
+
+        let db = new Db();
+        await db.init();
+        db.addHistory(cf);
+        e.target.reset();
+        intakeDialog.close();
+    }
 </script>
 
 <div class="flex flex-col p-6 justify-center items-center">
@@ -59,9 +77,9 @@
 </div>
 
 <dialog bind:this={intakeDialog} class="rounded-md">
-    <form on:submit|preventDefault={() => intakeDialog.close()} bind:this={intakeForm}>
+    <form on:submit|preventDefault={onFormSubmit} bind:this={intakeForm}>
         <div class="flex flex-col p-3 items-start">
-            <button on:click={() => intakeDialog.close()} class="self-end rounded-sm">
+            <button on:click={(e) => { intakeForm.reset(); intakeDialog.close() }} class="self-end rounded-sm">
                 <Fa icon={faClose} scale={1.2}/>
             </button>
             <h1 class="self-center text-3xl font-bold pb-6">New caffeine intake</h1>
