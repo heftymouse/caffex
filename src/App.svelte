@@ -23,7 +23,7 @@
     };
 </script>
 
-<header class="main-header">Caffex</header>
+<header class="w-full p-3 text-center text-2xl font-semibold border-b border-gray-400 sticky top-0 bg-white">Caffex</header>
 <main>
     <Router {routes}/>
     <TabView>

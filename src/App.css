@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-header {
-    @apply w-full p-3 text-center text-2xl font-semibold border-b border-gray-400 sticky;
-}
-
 .default-button {
     @apply self-center h-12 text-lg bg-black hover:bg-gray-600 transition-colors align-middle leading-none text-white p-3 rounded-md;
 }

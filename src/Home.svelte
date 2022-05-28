@@ -119,7 +119,7 @@
             </tbody>
         </table>
     </div>
-    <div class="flex flex-row">
+    <div class="flex flex-col md:flex-row">
         <div>
             <Line data={instantaneousCaffeineData} width={300} height={320} options={{ responsive: true, maintainAspectRatio: false }}/>
         </div>
