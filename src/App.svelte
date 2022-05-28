@@ -4,9 +4,9 @@
     import Router from "svelte-spa-router";
     import wrap from "svelte-spa-router/wrap"
     import { faHome, faClock } from "@fortawesome/free-solid-svg-icons";
+    import { pageName } from "./lib/stores";
 
     import "./App.css";
-import { currentTab, pageName } from "./stores";
 
     const routes = {
         '/': wrap({

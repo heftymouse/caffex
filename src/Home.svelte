@@ -1,13 +1,11 @@
 <script lang="ts">
     import { beforeUpdate, onMount } from "svelte";
     import Statistics from "./Statistics.svelte";
-    let intakeDialog;
-    import { currentTab, pageName } from './stores.js'
+    import { currentTab, pageName } from './lib/stores'
     import Question from './lib/Question.svelte'
-    let intakeForm;
     import Fa from "svelte-fa";
     import { faClose } from "@fortawesome/free-solid-svg-icons";
-
+    
     const mgPerMl = {
         "Brewed Coffee": 0.4,
         "Espresso": 2.1,
@@ -15,7 +13,7 @@
         "Green Tea": 0.12,
         "Energy Drink": 0.3
     }
-
+    
     const questions = [
         {
             heading: "What kind of drink did you have?",
@@ -35,7 +33,10 @@
             type: "number"
         }
     ]
-
+    
+    let intakeDialog;
+    let intakeForm;
+    
     beforeUpdate(() => {
         if(!localStorage.getItem("age") || !localStorage.getItem("weight")) {
             window.location.hash = "#/onboarding";
