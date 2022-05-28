@@ -9,7 +9,7 @@
     import { faClose } from "@fortawesome/free-solid-svg-icons";
 
     const mgPerMl = {
-        "Brewed Coffee": 0.32,
+        "Brewed Coffee": 0.4,
         "Espresso": 2.1,
         "Tea": 0.2,
         "Green Tea": 0.12,
