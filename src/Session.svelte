@@ -1,6 +1,6 @@
 <script lang="ts">
     import { beforeUpdate, onMount } from 'svelte';
-    import { currentTab, pageName } from './stores';
+    import { currentTab, pageName } from './lib/stores';
 
     beforeUpdate(() => {
         if(!localStorage.getItem("age") || !localStorage.getItem("weight")) {

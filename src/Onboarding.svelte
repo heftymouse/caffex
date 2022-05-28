@@ -2,7 +2,7 @@
 import { onMount } from "svelte";
 
     import Question from "./lib/Question.svelte";
-import { pageName } from "./stores";
+import { pageName } from "./lib/stores";
     const questions = [
         {
             heading: "What is your body weight? (In kilograms)",
