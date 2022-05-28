@@ -33,6 +33,11 @@
             heading: "How much of it did you have, in millilitres?",
             name: "drinkAmount",
             type: "number"
+        },
+        {
+            heading: "[DEBUG] Date",
+            name: "date",
+            type: "date"
         }
     ]
     
@@ -56,7 +61,7 @@
         const cf: CaffeineStorage = {
             drink: data.get('drinkName') as string,
             caffeine: drinkAmt * mgPerMl[data.get("drinkName") as string],
-            timestamp: new Date(Date.now())
+            timestamp: new Date(data.get("date") as string)
         }
 
         let db = new Db();
