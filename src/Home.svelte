@@ -1,8 +1,32 @@
 <script lang="ts">
     import { beforeUpdate, onMount } from "svelte";
-    import { currentTab } from './stores.js'
     import Statistics from "./Statistics.svelte";
     let intakeDialog;
+    import { currentTab, pageName } from './stores.js'
+    import Question from './lib/Question.svelte'
+    let intakeForm;
+    import Fa from "svelte-fa";
+    import { faClose } from "@fortawesome/free-solid-svg-icons";
+
+    const questions = [
+        {
+            heading: "What kind of drink did you have?",
+            name: "drinkName",
+            type: "select",
+            options: [
+                "Brewed Coffee",
+                "Espresso",
+                "Tea",
+                "Green Tea",
+                "Energy Drink"
+            ]
+        },
+        {
+            heading: "How much of it did you have, in millilitres?",
+            name: "drinkAmount",
+            type: "number"
+        }
+    ]
 
     beforeUpdate(() => {
         if(!localStorage.getItem("age") || !localStorage.getItem("weight")) {
@@ -11,7 +35,8 @@
     })
 
     onMount(() => {
-        currentTab.set("")
+        currentTab.set("");
+        pageName.set("Home");
     })
 </script>
 
@@ -25,8 +50,16 @@
 </div>
 
 <dialog bind:this={intakeDialog} class="rounded-md">
-    <div class="flex flex-col p-3">
-        <button on:click={() => intakeDialog.close()} class="self-end rounded-sm">X</button>
-        <h1 class="w-full self-center">New caffeine intake</h1>
-    </div>
+    <form on:submit|preventDefault={() => intakeDialog.close()} bind:this={intakeForm}>
+        <div class="flex flex-col p-3 items-start">
+            <button on:click={() => intakeDialog.close()} class="self-end rounded-sm">
+                <Fa icon={faClose} scale={1.2}/>
+            </button>
+            <h1 class="self-center text-3xl font-bold pb-6">New caffeine intake</h1>
+            {#each questions as q, i}
+            <Question ordinal={i + 1} {...q}/>
+            {/each}
+            <input type="submit" value="Submit" class="default-button"/>
+        </div>
+    </form>
 </dialog>

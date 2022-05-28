@@ -1,5 +1,8 @@
 <script lang="ts">
+import { onMount } from "svelte";
+
     import Question from "./lib/Question.svelte";
+import { pageName } from "./stores";
     const questions = [
         {
             heading: "What is your body weight? (In kilograms)",
@@ -22,6 +25,10 @@
         }
         location.hash = '#/'
     }
+
+    onMount(() => {
+        pageName.set("Welcome");
+    })
 </script>
 
 <div class="flex flex-col p-6 justify-center items-center">

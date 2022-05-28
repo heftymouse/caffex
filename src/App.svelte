@@ -6,6 +6,7 @@
     import { faHome, faClock } from "@fortawesome/free-solid-svg-icons";
 
     import "./App.css";
+import { currentTab, pageName } from "./stores";
 
     const routes = {
         '/': wrap({
@@ -22,6 +23,10 @@
         })
     };
 </script>
+
+<svelte:head>
+    <title>{`${$pageName} - Caffex`}</title>
+</svelte:head>
 
 <header class="w-full p-3 text-center text-2xl font-semibold border-b border-gray-400 sticky top-0 bg-white">Caffex</header>
 <main>
