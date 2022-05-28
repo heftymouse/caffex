@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .main-header {
-    @apply w-full p-3 text-center text-2xl font-semibold border-b border-gray-400;
+    @apply fixed w-full p-3 text-center text-2xl font-semibold border-b border-gray-400 bg-white;
 }
 
 th {

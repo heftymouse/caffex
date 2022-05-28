@@ -2,6 +2,8 @@
     let intakeDialog;
 </script>
 
+<header class="main-header">Home</header>
+
 <div class="flex flex-col p-1 justify-center items-center">
     <br><br><br>
     <button on:click={() => intakeDialog.showModal()} class="self-center h-12 text-lg bg-black hover:bg-gray-600 transition-colors align-middle leading-none text-white p-3 rounded-md">
