@@ -1,9 +1,16 @@
 <script lang="ts">
+    import { beforeUpdate } from "svelte";
     let intakeDialog;
+
+    beforeUpdate(() => {
+        if(!localStorage.getItem("age") || !localStorage.getItem("weight")) {
+            window.location.hash = "#/onboarding";
+        }
+    })
 </script>
 
 <div class="flex flex-col p-6 justify-center items-center">
-    <button on:click={() => intakeDialog.showModal()} class="self-center h-12 text-lg bg-black hover:bg-gray-600 transition-colors align-middle leading-none text-white p-3 rounded-md">
+    <button on:click={() => intakeDialog.showModal()} class="default-button">
         Add new caffeine intake
     </button>
     <br>

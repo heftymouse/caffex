@@ -1,4 +1,11 @@
 <script lang="ts">
+    import { beforeUpdate } from 'svelte';
+
+    beforeUpdate(() => {
+        if(!localStorage.getItem("age") || !localStorage.getItem("weight")) {
+            window.location.hash = "#/onboarding";
+        }
+    })
 </script>
 
 <header class="main-header">Session</header>
