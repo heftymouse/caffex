@@ -1,10 +1,5 @@
-import { writable, Writable } from "svelte/store";
-
-export type CaffeineStorage = {
-    drink: string;
-    caffeine: string;
-    timestamp: Date;
-}
+import {writable, Writable} from "svelte/store";
+import type {CaffeineStorage} from "./lib/caffeine_data";
 
 export const currentTab: Writable<string> = writable("");
 export const pageName: Writable<string> = writable("Home");
