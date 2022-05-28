@@ -8,6 +8,14 @@
     import Fa from "svelte-fa";
     import { faClose } from "@fortawesome/free-solid-svg-icons";
 
+    const mgPerMl = {
+        "Brewed Coffee": 0.32,
+        "Espresso": 2.1,
+        "Tea": 0.2,
+        "Green Tea": 0.12,
+        "Energy Drink": 0.3
+    }
+
     const questions = [
         {
             heading: "What kind of drink did you have?",
