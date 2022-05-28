@@ -1,6 +1,6 @@
 <script lang="ts">
     import { beforeUpdate, onMount } from "svelte";
-    import { currentTab } from './stores.js'
+    import { currentTab, pageName } from './stores.js'
     import Question from './lib/Question.svelte'
     let intakeDialog;
     let intakeForm;
@@ -102,7 +102,8 @@
     })
 
     onMount(() => {
-        currentTab.set("")
+        currentTab.set("");
+        pageName.set("Home");
     })
 </script>
 
