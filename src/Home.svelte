@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Header from "./util/Header.svelte"
     import {tick} from "svelte";
 
     let caffeineDialog = null
@@ -16,7 +15,7 @@
     }
 </script>
 
-<Header>Home</Header>
+<header class="main-header">Home</header>
 <br><br><br> <!--halp-->
 <div class="flex flex-col text-3xl justify-center items-center pt-2">
     <button class="rounded-lg border-2 border-black w-2/3" type="button" on:click={openDialog}>New Caffeine Intake</button>
