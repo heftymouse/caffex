@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .main-header {
-    @apply w-full p-3 text-center text-2xl font-semibold border-b border-gray-400 sticky;
+    @apply w-full p-3 text-center text-2xl font-semibold border-b border-gray-400 fixed bg-white;
 }
 
 .default-button {

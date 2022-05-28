@@ -2,7 +2,7 @@
     import Question from "./lib/Question.svelte";
     const questions = [
         {
-            heading: "What is your body weight?",
+            heading: "What is your body weight? (In kilograms)",
             name: "weight",
             type: "number"
         },

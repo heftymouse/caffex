@@ -83,6 +83,7 @@
 </script>
 
 <div class="flex flex-col p-6 justify-center items-center">
+    <br><br>
     <button on:click={() => intakeDialog.showModal()} class="default-button">
         Add new caffeine intake
     </button>
