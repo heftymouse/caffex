@@ -2,6 +2,7 @@
     import {faHome, faClock} from '@fortawesome/free-solid-svg-icons'
     import { TabView, TabList, TabPanel, Tab } from './tab/tabs.ts';
     import Home from "./Home.svelte";
+    import Session from "./Session.svelte";
 </script>
 
 <TabView>
@@ -15,6 +16,6 @@
     </TabPanel>
 
     <TabPanel>
-        <!--TODO-->
+        <Session/>
     </TabPanel>
 </TabView>
