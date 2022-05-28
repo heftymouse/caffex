@@ -51,11 +51,11 @@
     })
 
     async function onFormSubmit(e) {
-        let data: FormData = new FormData(e.target);
-        console.log(...data);
+        const data: FormData = new FormData(e.target);
+        const drinkAmt = parseInt(data.get('drinkAmount') as string);
         const cf: CaffeineStorage = {
             drink: data.get('drinkName') as string,
-            caffeine: parseInt(data.get('drinkAmount') as string),
+            caffeine: drinkAmt * mgPerMl[data.get("drinkName") as string],
             timestamp: new Date(Date.now())
         }
 
