@@ -1,6 +1,7 @@
 <script lang="ts">
     import Line from "svelte-chartjs/src/Line.svelte"
     import Bar from "svelte-chartjs/src/Bar.svelte"
+    import {getLast24HoursTotalCaffeine} from "lib/caffeine_data"
 
     let instantaneousCaffeineData = {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00"],
@@ -69,7 +70,7 @@
     };
 </script>
 
-<h4 class="text-xl">Caffeine in the last 24 hours: 140 mg</h4>
+<h4 class="text-xl">Caffeine in the last 24 hours: {} mg</h4>
 <h4 class="text-xl">Approximate amount of caffeine: 50 mg</h4>
 <h4 class="text-xl">Your intake is not above the daily limit</h4>
 <div class="w-full text-left p-4">
