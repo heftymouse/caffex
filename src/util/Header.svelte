@@ -1,0 +1,7 @@
+<header class="text-xl
+             fixed
+             inset-x-0
+             top-0
+             p-3 text-center font-semibold bg-white border-b border-gray-200">
+    <slot></slot>
+</header>

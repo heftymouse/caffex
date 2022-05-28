@@ -1,6 +1,6 @@
 <script lang="ts">
     import {faHome, faClock} from '@fortawesome/free-solid-svg-icons'
-    import { TabView, TabList, TabPanel, Tab } from './tab/tabs.ts';
+    import { TabView, TabList, TabPanel, Tab } from './util/tabs.ts';
     import Home from "./Home.svelte";
     import Session from "./Session.svelte";
 </script>
