@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { beforeUpdate } from "svelte";
     let intakeDialog;
     import Line from "svelte-chartjs/src/Line.svelte"
     import Bar from "svelte-chartjs/src/Bar.svelte"
@@ -68,13 +69,16 @@
             ]
         }
     };
+
+    beforeUpdate(() => {
+        if(!localStorage.getItem("age") || !localStorage.getItem("weight")) {
+            window.location.hash = "#/onboarding";
+        }
+    })
 </script>
 
-<header class="main-header">Home</header>
-
-<div class="flex flex-col p-1 justify-center items-center">
-    <br><br><br>
-    <button on:click={() => intakeDialog.showModal()} class="self-center h-12 text-lg bg-black hover:bg-gray-600 transition-colors align-middle leading-none text-white p-3 rounded-md">
+<div class="flex flex-col p-6 justify-center items-center">
+    <button on:click={() => intakeDialog.showModal()} class="default-button">
         Add new caffeine intake
     </button>
     <br>
