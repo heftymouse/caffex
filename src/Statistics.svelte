@@ -1,67 +1,35 @@
 <script lang="ts">
     import Line from "svelte-chartjs/src/Line.svelte"
     import Bar from "svelte-chartjs/src/Bar.svelte"
-    import {CaffeineStorage, getCaffeineAtAll, getDailyLimitMessage, getLast24HoursTotalCaffeine} from "./lib/types";
+    import {
+        CaffeineStorage,
+        getAllCaffeineAt,
+        getAllCaffeineAtHours, getDailyCaffeineData,
+        getDailyLimitMessage,
+        getLast24HoursTotalCaffeine
+    } from "./lib/types";
     import {caffeineData} from "./stores";
 
     let cachedCaffeineData: CaffeineStorage[];
     let last24hoursCaffeine: number;
     $: last24hoursCaffeine = getLast24HoursTotalCaffeine(cachedCaffeineData);
     let instantaneousCaffeine: number;
-    $: instantaneousCaffeine = Math.floor(getCaffeineAtAll(cachedCaffeineData, new Date()) * 10) / 10;
+    $: instantaneousCaffeine = Math.floor(getAllCaffeineAt(cachedCaffeineData, new Date()) * 10) / 10;
     let age: number;
     $: age = Number(localStorage.getItem('age'));
     let weight: number;
     $: weight = Number(localStorage.getItem('weight'));
     let dailyLimitMessage: string;
     $: dailyLimitMessage = getDailyLimitMessage(age, weight, last24hoursCaffeine);
+    let instantaneousCaffeineData
+    $: instantaneousCaffeineData = getAllCaffeineAtHours(cachedCaffeineData, 6);
+    let dailyCaffeineData
+    $: dailyCaffeineData = getDailyCaffeineData(cachedCaffeineData, 5, age, weight);
 
     caffeineData.subscribe(data => {
         cachedCaffeineData = data;
     });
 
-    let instantaneousCaffeineData = {
-        labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00"],
-        datasets: [{
-            label: "Approximate Caffeine in body",
-            backgroundColor: "rgba(225, 204,230, .3)",
-            borderColor: "rgb(255, 100, 18)",
-            borderCapStyle: "butt",
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: "miter",
-            pointBackgroundColor: "rgb(255, 255, 255)",
-            pointBorderWidth: 10,
-            pointRadius: 1,
-            data: [100, 87, 75.8, 66, 57.4, 50, 43.5]
-        }]
-    };
-    let dailyCaffeineData = {
-        labels: ["22/7", "23/7", "24/7", "25/7", "26/7", "27/7"],
-        datasets: [
-            {
-                label: "Daily Caffeine intake",
-                data: [300, 250, 330, 200, 150, 140],
-                backgroundColor: [
-                    "rgba(69, 69, 69, 1)",
-                    "rgba(69, 69, 69, 1)",
-                    "rgba(69, 69, 69, 1)",
-                    "rgba(69, 69, 69, 1)",
-                    "rgba(69, 69, 69, 1)",
-                    "rgba(69, 69, 69, 1)"
-                ],
-                borderWidth: 2,
-                borderColor: [
-                    "rgba(29, 29, 29, 1)",
-                    "rgba(29, 29, 29, 1)",
-                    "rgba(29, 29, 29, 1)",
-                    "rgba(29, 29, 29, 1)",
-                    "rgba(29, 29, 29, 1)",
-                    "rgba(29, 29, 29, 1)"
-                ]
-            }
-        ]
-    };
     let options = {
         responsive: true,
         scales: {

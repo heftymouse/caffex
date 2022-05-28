@@ -23,7 +23,7 @@ export function getLast24HoursTotalCaffeine(data: CaffeineStorage[]): number {
     return clearData(data, TWENTY_FOUR_HOURS).reduce((total, datum) => datum.caffeine + total, 0);
 }
 
-export function getCaffeineAtAll(data: CaffeineStorage[], at: Date): number {
+export function getAllCaffeineAt(data: CaffeineStorage[], at: Date): number {
     return data.reduce((total, datum) => getCaffeineAt(datum, at), 0);
 }
 
@@ -69,5 +69,79 @@ export function getDailyLimit(age: number, weight: number): number {
         return 2.5 * weight;
     } else {
         return 400;
+    }
+}
+
+export function getAllCaffeineAtHours(data: CaffeineStorage[], hours: number) {
+    const labels: string[] = [];
+    const values: number[] = [];
+    const now = new Date();
+    const start = new Date(now.getTime() - (hours * 3600000));
+    const startHrs = new Date(start.getTime() - start.getMinutes() * 60000);
+    for (let i = 0; i < hours; i++) {
+        labels.push(`${(startHrs.getHours() + i)}:00`);
+        values.push(getAllCaffeineAt(data, new Date(startHrs.getTime() + (i * 3600000))));
+    }
+    return {
+        labels: labels,
+        datasets: [{
+            label: "Approximate Caffeine in body",
+            backgroundColor: "rgba(225, 204,230, .3)",
+            borderColor: "rgb(255, 100, 18)",
+            borderCapStyle: "butt",
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: "miter",
+            pointBackgroundColor: "rgb(255, 255, 255)",
+            pointBorderWidth: 10,
+            pointRadius: 1,
+            data: values
+        }]
+    };
+}
+
+export function getDailyCaffeineData(data: CaffeineStorage[], days: number, age: number, weight: number): any {
+    const dailyLimit = getDailyLimit(age, weight);
+    const labels: string[] = [];
+    const values: number[] = [];
+    const backgroundColors: string[] = [];
+    const borderColors: string[] = [];
+    const now = new Date();
+    const start = new Date(now.getTime() - (days * 86400000));
+    const startDay = new Date(start.getTime() - start.getHours() * 3600000);
+    for (let i = 0; i < days; i++) {
+        labels.push(`${(startDay.getDate() + i)}/${(startDay.getMonth() + 1)}`);
+        values.push(getAllCaffeineAt(data, new Date(startDay.getTime() + (i * 86400000))));
+        pushColors(backgroundColors, borderColors, values[i], dailyLimit);
+    }
+    labels.push("Today")
+    const todayCaffeine = getAllCaffeineAt(data, now);
+    values.push(todayCaffeine);
+    pushColors(backgroundColors, borderColors, todayCaffeine, dailyLimit);
+
+    return {
+        labels: labels,
+        datasets: [
+            {
+                label: "Daily Caffeine intake",
+                data: values,
+                backgroundColor: backgroundColors,
+                borderWidth: 2,
+                borderColor: borderColors
+            }
+        ]
+    };
+}
+
+function pushColors(backgroundColors: string[], borderColors: string[], value: number, dailyLimit: number) {
+    if (value > dailyLimit) {
+        backgroundColors.push("rgba(255,14,14,0.3)");
+        borderColors.push("rgba(255,14,14,1)");
+    } else if (value != 0 && (dailyLimit - value) <= 30) {
+        backgroundColors.push("rgba(255,255,14,0.3)");
+        borderColors.push("rgba(255,255,14,1)");
+    } else {
+        backgroundColors.push("rgba(0,255,0,0.3)");
+        borderColors.push("rgba(0,255,0,1)");
     }
 }
