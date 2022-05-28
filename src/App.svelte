@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { faHome, faClock } from "@fortawesome/free-solid-svg-icons";
     import TabView from "./lib/TabView.svelte";
     import Tab from "./lib/Tab.svelte";
     import Router from "svelte-spa-router";
     import wrap from "svelte-spa-router/wrap"
+    import { faHome, faClock } from "@fortawesome/free-solid-svg-icons";
 
     import "./App.css";
-    import Onboarding from "./Onboarding.svelte";
 
     const routes = {
         '/': wrap({
@@ -24,7 +23,7 @@
     };
 </script>
 
-<header class="main-header">Beans</header>
+<header class="main-header">Caffex</header>
 <main>
     <Router {routes}/>
     <TabView>

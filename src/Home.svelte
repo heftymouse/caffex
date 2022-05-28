@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { beforeUpdate } from "svelte";
+    import { beforeUpdate, onMount } from "svelte";
+    import { currentTab } from './stores.js'
     let intakeDialog;
     import Line from "svelte-chartjs/src/Line.svelte"
     import Bar from "svelte-chartjs/src/Bar.svelte"
@@ -74,6 +75,10 @@
         if(!localStorage.getItem("age") || !localStorage.getItem("weight")) {
             window.location.hash = "#/onboarding";
         }
+    })
+
+    onMount(() => {
+        currentTab.set("")
     })
 </script>
 
