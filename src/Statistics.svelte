@@ -1,7 +1,7 @@
 <script lang="ts">
     import Line from "svelte-chartjs/src/Line.svelte"
     import Bar from "svelte-chartjs/src/Bar.svelte"
-    import {getLast24HoursTotalCaffeine} from "lib/caffeine_data"
+    import {getLast24HoursTotalCaffeine} from "lib/types.ts"
 
     let instantaneousCaffeineData = {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00"],
