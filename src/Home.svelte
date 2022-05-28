@@ -2,7 +2,7 @@
     let intakeDialog;
 </script>
 
-<div class="flex flex-col p-12 justify-center items-center">
+<div class="flex flex-col p-6 justify-center items-center">
     <button on:click={() => intakeDialog.showModal()} class="self-center h-12 text-lg bg-black hover:bg-gray-600 transition-colors align-middle leading-none text-white p-3 rounded-md">
         Add new caffeine intake
     </button>
