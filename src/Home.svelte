@@ -7,7 +7,8 @@
     import { faClose } from "@fortawesome/free-solid-svg-icons";
     import type { CaffeineStorage } from "./lib/types";
     import { Db } from "./lib/db";
-    
+    import {cachedData} from "./lib/types";
+
     const mgPerMl = {
         "Brewed Coffee": 0.4,
         "Espresso": 2.1,
@@ -15,7 +16,7 @@
         "Green Tea": 0.12,
         "Energy Drink": 0.3
     }
-    
+
     const questions = [
         {
             heading: "What kind of drink did you have?",
@@ -40,10 +41,10 @@
             type: "date"
         }
     ]
-    
+
     let intakeDialog;
     let intakeForm;
-    
+
     beforeUpdate(() => {
         if(!localStorage.getItem("age") || !localStorage.getItem("weight")) {
             window.location.hash = "#/onboarding";
@@ -69,6 +70,7 @@
         db.addHistory(cf);
         e.target.reset();
         intakeDialog.close();
+        cachedData = await db.getHistory();
     }
 </script>
 

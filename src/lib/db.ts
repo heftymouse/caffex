@@ -29,7 +29,7 @@ class Db {
 
     async getHistory() {
         const data = await this.db.getAll("history");
-        return data;
+        return !data ? [] : data;
     }
 }
 

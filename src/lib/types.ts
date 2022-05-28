@@ -4,6 +4,8 @@ export type CaffeineStorage = {
     timestamp: Date;
 }
 
+export let cachedData: CaffeineStorage[] = [];
+
 const TWENTY_FOUR_HOURS: number = 86400000
 const THIRTY_SIX_HOURS: number = TWENTY_FOUR_HOURS * 1.5
 const SEVEN_DAYS: number = TWENTY_FOUR_HOURS * 7

@@ -9,26 +9,25 @@
         getLast24HoursTotalCaffeine
     } from "./lib/types";
     import {caffeineData} from "./stores";
-
     let cachedCaffeineData: CaffeineStorage[];
-    let last24hoursCaffeine: number;
-    $: last24hoursCaffeine = getLast24HoursTotalCaffeine(cachedCaffeineData);
-    let instantaneousCaffeine: number;
-    $: instantaneousCaffeine = Math.floor(getAllCaffeineAt(cachedCaffeineData, new Date()) * 10) / 10;
-    let age: number;
-    $: age = Number(localStorage.getItem('age'));
-    let weight: number;
-    $: weight = Number(localStorage.getItem('weight'));
-    let dailyLimitMessage: string;
-    $: dailyLimitMessage = getDailyLimitMessage(age, weight, last24hoursCaffeine);
-    let instantaneousCaffeineData
-    $: instantaneousCaffeineData = getAllCaffeineAtHours(cachedCaffeineData, 6);
-    let dailyCaffeineData
-    $: dailyCaffeineData = getDailyCaffeineData(cachedCaffeineData, 5, age, weight);
-
     caffeineData.subscribe(data => {
         cachedCaffeineData = data;
     });
+
+    // let last24hoursCaffeine: number;
+    $: last24hoursCaffeine = getLast24HoursTotalCaffeine(cachedCaffeineData);
+    // let instantaneousCaffeine: number;
+    $: instantaneousCaffeine = Math.floor(getAllCaffeineAt(cachedCaffeineData, new Date()) * 10) / 10;
+    // let age: number;
+    $: age = Number(localStorage.getItem('age'));
+    // let weight: number;
+    $: weight = Number(localStorage.getItem('weight'));
+    // let dailyLimitMessage: string;
+    $: dailyLimitMessage = getDailyLimitMessage(age, weight, last24hoursCaffeine);
+    // let instantaneousCaffeineData
+    $: instantaneousCaffeineData = getAllCaffeineAtHours(cachedCaffeineData, 6);
+    // let dailyCaffeineData
+    $: dailyCaffeineData = getDailyCaffeineData(cachedCaffeineData, 5, age, weight);
 
     let options = {
         responsive: true,
