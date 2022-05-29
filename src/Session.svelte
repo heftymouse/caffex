@@ -108,7 +108,7 @@
         </form>
     {:else}
         {#if dailyLimit === 0 || age < 12}
-            <h1 class="font-3xl">You shouldn't be having any caffeine so as to not exceed the daily limit</h1>
+            <h1 class="font-3xl">You shouldn't be having any caffeine</h1>
         {:else}
             <h1 class="font-3xl">Your session ends in {diffHHMM(new Date(), cachedSessionData.time)}</h1>
             <h1 class="font-3xl">Your next dose of caffeine should be a </h1>
