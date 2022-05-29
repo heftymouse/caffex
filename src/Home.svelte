@@ -38,7 +38,7 @@
         {
             heading: "[DEBUG] Date",
             name: "date",
-            type: "date"
+            type: "datetime-local"
         }
     ]
 
