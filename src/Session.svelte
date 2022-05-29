@@ -102,7 +102,7 @@
                     });
                     calculateNextDose();
                 }} class="default-button">
-                    <span class="font-bold">Stop session</span>
+                    <span class="font-bold">Start session</span>
                 </button>
             </div>
         </form>
