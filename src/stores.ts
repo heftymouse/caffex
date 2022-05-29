@@ -16,8 +16,10 @@ export type SessionData = {
     time: Date;
 }
 
+export type DoseType = "invalid" | "sleep" | "dose"
+
 export type CaffeineDose = {
-    noCaffeine: boolean,
+    doseType: DoseType,
     amount: number,
     time: string,
     type: string

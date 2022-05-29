@@ -2,7 +2,7 @@
     import { beforeUpdate, onMount } from 'svelte';
     import { currentTab, pageName } from './lib/stores';
     import {caffeineData, SessionData, CaffeineDose} from './stores'
-    import {CaffeineStorage, getDailyLimit, getLast24HoursTotalCaffeine} from "./lib/types";
+    import {CaffeineStorage, getAllCaffeineAt, getDailyLimit, getLast24HoursTotalCaffeine} from "./lib/types";
     import CaffeineSuggestion from "./CaffeineSuggestion.svelte";
 
     beforeUpdate(() => {
@@ -55,17 +55,25 @@
 
     // TODO
     function calculateNextDose() {
-        const leftMg: number = Math.min(dailyLimit - last24hoursCaffeine, 50);
         if (age < 12) {
             nextDoseOfCaffeine = {
-                noCaffeine: true,
+                doseType: "invalid",
                 amount: 0,
                 time: "",
                 type: ""
             }
+        }
+        const currentRateAmount = getAllCaffeineAt(cachedCaffeineData, cachedSessionData.time);
+        if (currentRateAmount >= 50) {
+            return nextDoseOfCaffeine = {
+                doseType: "sleep",
+                amount: 0,
+                time: "",
+                type: ""
+            };
         } else {
             nextDoseOfCaffeine = {
-                noCaffeine: true,
+                doseType: "dose",
                 amount: 0,
                 time: "",
                 type: ""
