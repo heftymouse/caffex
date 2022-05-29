@@ -25,6 +25,32 @@ export function getLast24HoursTotalCaffeine(data: CaffeineStorage[]): number {
     return clearData(data, TWENTY_FOUR_HOURS).reduce((total, datum) => datum.caffeine + total, 0);
 }
 
+export type SimpleCaffeineStorage = {
+    drink: string;
+    caffeine: number;
+    timestamp: string;
+}
+
+export function getRecentCaffeineIntakes(data: CaffeineStorage[]): SimpleCaffeineStorage[] {
+    const simpleData: SimpleCaffeineStorage[] = clearData(data, THIRTY_SIX_HOURS).map(datum => {
+        return {
+            drink: datum.drink,
+            caffeine: datum.caffeine,
+            timestamp: formatHHMM(datum.timestamp)
+        }
+    });
+    if (simpleData.length <= 3) {
+        return simpleData;
+    }
+    return simpleData.slice(0, 3);
+}
+
+function formatHHMM(date: Date): string {
+    const hours: number = date.getHours();
+    const minutes: number = date.getMinutes();
+    return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
+}
+
 export function getAllCaffeineAt(data: CaffeineStorage[], at: Date): number {
     return data.reduce((total, datum) => getCaffeineAt(datum, at), 0);
 }

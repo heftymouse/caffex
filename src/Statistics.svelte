@@ -6,7 +6,7 @@
         getAllCaffeineAt,
         getAllCaffeineAtHours, getDailyCaffeineData,
         getDailyLimitMessage,
-        getLast24HoursTotalCaffeine
+        getLast24HoursTotalCaffeine, getRecentCaffeineIntakes
     } from "./lib/types";
     import {caffeineData} from "./stores";
     let cachedCaffeineData: CaffeineStorage[];
@@ -28,6 +28,7 @@
     $: instantaneousCaffeineData = getAllCaffeineAtHours(cachedCaffeineData, 6);
     // let dailyCaffeineData
     $: dailyCaffeineData = getDailyCaffeineData(cachedCaffeineData, 5, age, weight);
+    $: recentCaffeineIntakes = getRecentCaffeineIntakes(cachedCaffeineData);
 
     let options = {
         responsive: true,
@@ -43,32 +44,26 @@
 <h4 class="text-xl">{dailyLimitMessage}</h4>
 <div class="w-full text-left p-4">
     <h4 class="text-2xl decoration-gray-300 underline">Recent caffeine intakes</h4>
-    <table class="table-auto text-xl w-full">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Time</th>
-            <th>Caffeine</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Coca Cola</td>
-            <td>17:15</td>
-            <td>10 mg</td>
-        </tr>
-        <tr>
-            <td>Energy Drink</td>
-            <td>16:45</td>
-            <td>30 mg</td>
-        </tr>
-        <tr>
-            <td>Brewed Coffee</td>
-            <td>10:15</td>
-            <td>100 mg</td>
-        </tr>
-        </tbody>
-    </table>
+    {#if recentCaffeineIntakes.length > 0}
+        <table class="table-auto text-xl w-full">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Time</th>
+                <th>Caffeine</th>
+            </tr>
+            </thead>
+            <tbody>
+            {#each recentCaffeineIntakes as datum}
+                <tr>
+                    <td>{datum.drink}</td>
+                    <td>{datum.timestamp}</td>
+                    <td>{datum.caffeine} mg</td>
+                </tr>
+            {/each}
+            </tbody>
+        </table>
+    {/if}
 </div>
 <div class="flex flex-col md:flex-row">
     <div>
