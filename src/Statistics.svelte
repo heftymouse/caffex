@@ -24,7 +24,7 @@
     $: weight = Number(localStorage.getItem('weight'));
     // let dailyLimitMessage: string;
     $: dailyLimit = getDailyLimit(age, weight);
-    $: dailyLimitMessage = getDailyLimitMessage(age, weight, last24hoursCaffeine);
+    $: dailyLimitMessage = getDailyLimitMessage(age, weight, last24hoursCaffeine).replace("%s", `(${dailyLimit} mg)`);
     // let instantaneousCaffeineData
     $: instantaneousCaffeineData = getAllCaffeineAtHours(cachedCaffeineData, 10);
     // let dailyCaffeineData
@@ -42,7 +42,7 @@
 
 <h4 class="text-xl">Caffeine in the last 24 hours: {last24hoursCaffeine} mg</h4>
 <h4 class="text-xl">Approximate amount of caffeine: {instantaneousCaffeine} mg</h4>
-<h4 class="text-xl">{dailyLimitMessage}. Your daily limit is {dailyLimit} mg</h4>
+<h4 class="text-xl">{dailyLimitMessage}</h4>
 {#if recentCaffeineIntakes.length > 0}
     <div class="w-full text-left p-4">
         <h4 class="text-2xl decoration-gray-300 underline">Recent caffeine intakes</h4>
