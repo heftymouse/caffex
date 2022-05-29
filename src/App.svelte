@@ -7,6 +7,9 @@
     import { pageName } from "./lib/stores";
 
     import "./App.css";
+    import { onMount } from "svelte";
+    import { Db } from "./lib/db";
+    import { caffeineData } from "./stores";
 
     const routes = {
         '/': wrap({
@@ -22,6 +25,12 @@
             asyncComponent: () => import('./Home.svelte')
         })
     };
+
+    onMount(async () => {
+        let db = new Db();
+        await db.init();
+        $caffeineData = await db.getHistory();
+    })
 </script>
 
 <svelte:head>

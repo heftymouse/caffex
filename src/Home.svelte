@@ -7,7 +7,7 @@
     import { faClose } from "@fortawesome/free-solid-svg-icons";
     import type { CaffeineStorage } from "./lib/types";
     import { Db } from "./lib/db";
-    import {cachedData} from "./lib/types";
+    import { caffeineData } from "./stores";
 
     const mgPerMl = {
         "Brewed Coffee": 0.4,
@@ -64,13 +64,12 @@
             caffeine: drinkAmt * mgPerMl[data.get("drinkName") as string],
             timestamp: new Date(data.get("date") as string)
         }
+        console.log($caffeineData);
 
-        let db = new Db();
-        await db.init();
-        db.addHistory(cf);
-        e.target.reset();
-        intakeDialog.close();
-        cachedData = await db.getHistory();
+        caffeineData.update((value) => {
+            value.push(cf);
+            return value;
+        });
     }
 </script>
 
