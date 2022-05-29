@@ -70,6 +70,7 @@
             value.push(cf);
             return value;
         });
+        intakeDialog.close();
     }
 </script>
 
