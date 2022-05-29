@@ -58,7 +58,6 @@
         if (age < 12) {
             nextDoseOfCaffeine = {
                 doseType: "invalid",
-                amount: 0,
                 time: "",
                 type: ""
             }
@@ -67,14 +66,12 @@
         if (currentRateAmount >= 50) {
             return nextDoseOfCaffeine = {
                 doseType: "sleep",
-                amount: 0,
                 time: "",
                 type: ""
             };
         } else {
             nextDoseOfCaffeine = {
                 doseType: "dose",
-                amount: 0,
                 time: "",
                 type: ""
             }

@@ -20,7 +20,6 @@ export type DoseType = "invalid" | "sleep" | "dose"
 
 export type CaffeineDose = {
     doseType: DoseType,
-    amount: number,
     time: string,
     type: string
 }
