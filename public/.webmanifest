@@ -1,0 +1,17 @@
+{
+    "short_name": "Caffex",
+    "name": "Caffex",
+    "icons": [
+      {
+        "src": "/images/icons-vector.svg",
+        "type": "image/svg+xml",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#ffffff",
+    "description": "Supercharge your caffeine intake"
+  }
