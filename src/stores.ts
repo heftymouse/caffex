@@ -16,4 +16,9 @@ export type SessionData = {
     time: Date;
 }
 
-export const sessionData: Writable<SessionData> = writable(null);
+export type CaffeineDose = {
+    noCaffeine: boolean,
+    amount: number,
+    time: string,
+    type: string
+}
